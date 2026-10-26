@@ -727,8 +727,25 @@ function FullLeads() {
                         <div className="follow-body-header">
                           <div className="followup-srNo">{index + 1}</div>
                           <div >
-                            <span className="cratedBy">Created Date-</span> <span className="cratedBy">{followUp.createdAt.split("T")[0]}</span>
-                            <div style={{ marginTop: "5px" }}><span className="cratedBy">Created By-</span> <span className="cratedBy">{followUp.followedBy.empName}</span></div>
+                            <span className="cratedBy">Created: </span> 
+                            <span className="cratedBy">
+                              {followUp?.createdAt ? new Date(followUp.createdAt).toLocaleString('en-IN', {
+                                day: '2-digit', month: '2-digit', year: 'numeric',
+                                hour: '2-digit', minute: '2-digit', hour12: true
+                              }) : "NA"}
+                            </span>
+                            <div style={{ marginTop: "5px" }}><span className="cratedBy">Created By-</span> <span className="cratedBy">{followUp.followedBy?.empName}</span></div>
+                            {followUp?.nextFollowupDate && (
+                              <div style={{ marginTop: "5px" }}>
+                                <span className="cratedBy">Next Reminder: </span>
+                                <span className="cratedBy" style={{ color: '#d9534f', fontWeight: 'bold' }}>
+                                  {new Date(followUp.nextFollowupDate).toLocaleString('en-IN', {
+                                    day: '2-digit', month: '2-digit', year: 'numeric',
+                                    hour: '2-digit', minute: '2-digit', hour12: true
+                                  })}
+                                </span>
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="follow-ups-txt">

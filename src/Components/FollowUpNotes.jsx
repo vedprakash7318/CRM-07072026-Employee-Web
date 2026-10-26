@@ -25,6 +25,7 @@ function FollowUpNotes({ isOpenNote, oncloseNote, leadData, onFollowupAdded }) {
   const [status, setStatus] = useState("");
   const [isScheduled, setIsScheduled] = useState(true); // Changed to true by default
   const [reminder, setReminderDate] = useState("");
+  const [clientSpoken, setClientSpoken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // ================= REDUX =================
@@ -77,7 +78,10 @@ function FollowUpNotes({ isOpenNote, oncloseNote, leadData, onFollowupAdded }) {
     tomorrow.setDate(tomorrow.getDate() + 1);
     tomorrow.setHours(9, 0, 0, 0);
     setReminderDate(getLocalDatetimeString(tomorrow));
+    setService("");
+    setStatus("");
     setIsScheduled(true);
+    setClientSpoken("");
     setIsLoading(false);
   };
 
@@ -99,6 +103,16 @@ function FollowUpNotes({ isOpenNote, oncloseNote, leadData, onFollowupAdded }) {
         severity: "warn",
         summary: "Required",
         detail: "Please select a service",
+        life: 3000,
+      });
+      return;
+    }
+
+    if (clientSpoken === "") {
+      toast.current.show({
+        severity: "warn",
+        summary: "Required",
+        detail: "Please select if you spoke to the client",
         life: 3000,
       });
       return;
@@ -127,6 +141,7 @@ function FollowUpNotes({ isOpenNote, oncloseNote, leadData, onFollowupAdded }) {
           service,
           status,
           followedBy: employeeId,
+          clientSpoken,
           reminder: isScheduled && reminder ? new Date(reminder).toISOString() : null,
         },
         { 
@@ -258,10 +273,34 @@ function FollowUpNotes({ isOpenNote, oncloseNote, leadData, onFollowupAdded }) {
                 borderColor: message ? '#0d6efd' : '#dee2e6',
                 resize: 'vertical',
                 fontSize: '0.95rem',
-                transition: 'all 0.2s'
+                transition: 'border-color 0.2s'
               }}
               autoFocus
             />
+            
+            <div className="mt-3">
+              <label className="form-label fw-semibold mb-2">
+                Client se baat hua ? <span className="text-danger">*</span>
+              </label>
+              <div className="d-flex gap-2">
+                <button
+                  type="button"
+                  className={`btn ${clientSpoken === true ? 'btn-primary' : 'btn-outline-primary'} flex-grow-1`}
+                  onClick={() => setClientSpoken(true)}
+                  style={{ borderRadius: '8px', fontWeight: '500' }}
+                >
+                  {clientSpoken === true ? '✔ Yes' : 'Yes'}
+                </button>
+                <button
+                  type="button"
+                  className={`btn ${clientSpoken === false ? 'btn-danger' : 'btn-outline-danger'} flex-grow-1`}
+                  onClick={() => setClientSpoken(false)}
+                  style={{ borderRadius: '8px', fontWeight: '500' }}
+                >
+                  {clientSpoken === false ? '✔ No' : 'No'}
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* REMINDER */}

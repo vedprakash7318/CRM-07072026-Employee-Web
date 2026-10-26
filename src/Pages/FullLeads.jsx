@@ -797,7 +797,13 @@ function FullLeads() {
                         <div className="follow-body-header">
                           <div className="followup-srNo">{followUps.length - index}</div>
                           <div>
-                            <span className="cratedBy">Created Date-</span> <span className="cratedBy">{followUp.createdAt.split("T")[0]}</span>
+                            <span className="cratedBy">Created: </span> 
+                            <span className="cratedBy">
+                              {followUp?.createdAt ? new Date(followUp.createdAt).toLocaleString('en-IN', {
+                                day: '2-digit', month: '2-digit', year: 'numeric',
+                                hour: '2-digit', minute: '2-digit', hour12: true
+                              }) : "NA"}
+                            </span>
                             <div style={{ marginTop: "5px" }}><span className="cratedBy">Created By-</span> <span className="cratedBy">{followUp.followedBy?.empName}</span></div>
                           </div>
                         </div>
@@ -805,10 +811,13 @@ function FullLeads() {
                           <p><b>Message:- </b><span>{followUp.followupMessage}</span></p>
                           <p><b>Service:- </b><span>{followUp?.service?.servicesText}</span></p>
                           <p>
-                            <b>Next-FollowUp-Date:- </b>
-                            <span>
+                            <b>Next Reminder: </b>
+                            <span style={{ color: '#d9534f', fontWeight: 'bold' }}>
                               {followUp?.nextFollowupDate
-                                ? new Date(followUp.nextFollowupDate).toLocaleDateString('en-GB')
+                                ? new Date(followUp.nextFollowupDate).toLocaleString('en-IN', {
+                                    day: '2-digit', month: '2-digit', year: 'numeric',
+                                    hour: '2-digit', minute: '2-digit', hour12: true
+                                  })
                                 : "Not Set"}
                             </span>
                           </p>

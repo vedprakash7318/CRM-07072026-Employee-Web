@@ -8,7 +8,8 @@ import {
   FaClock,
   FaBell,
   FaCheckCircle,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaUniversity
 } from "react-icons/fa";
 import {
   BarChart,
@@ -151,6 +152,42 @@ const MainDashboard = () => {
           <h1>{stats?.negativeLeads}</h1>
         </div>
 
+        {/* Assigned Colleges */}
+        <div className="dashboard-card assigned-colleges-card" style={{ gridColumn: "1 / -1", textAlign: "left", padding: "24px" }}>
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "16px", borderBottom: "1px solid #f3f4f6", paddingBottom: "12px" }}>
+            <FaUniversity style={{ color: "#4f46e5", fontSize: "28px", marginRight: "12px", marginBottom: "0" }} />
+            <h4 style={{ fontSize: "18px", color: "#1f2937", margin: "0", fontWeight: "700" }}>My Assigned Colleges</h4>
+          </div>
+          
+          {stats?.assignedColleges && stats.assignedColleges.length > 0 ? (
+            <div className="colleges-container" style={{ display: "flex", flexWrap: "wrap", gap: "12px", maxHeight: "200px", overflowY: "auto", paddingRight: "8px" }}>
+              {stats.assignedColleges.map((college, idx) => (
+                <div key={idx} className="college-badge" style={{
+                  display: "flex",
+                  alignItems: "center",
+                  background: "linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)",
+                  color: "#3730a3",
+                  padding: "8px 16px",
+                  borderRadius: "20px",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+                  border: "1px solid #a5b4fc",
+                  transition: "all 0.2s ease"
+                }}>
+                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#4f46e5", marginRight: "8px" }}></div>
+                  {college}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "20px 0", color: "#9ca3af" }}>
+              <FaUniversity style={{ fontSize: "32px", color: "#e5e7eb", marginBottom: "8px" }} />
+              <p style={{ fontSize: "15px", margin: 0 }}>No colleges assigned yet</p>
+            </div>
+          )}
+        </div>
+
       </div>
 
       <div className="custom-chart-card">
@@ -181,6 +218,8 @@ const MainDashboard = () => {
               <Bar dataKey="Reminders" fill="#eab308" radius={[4, 4, 0, 0]} barSize={12} />
               <Bar dataKey="Missed" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={12} />
               <Bar dataKey="Closed" fill="#10b981" radius={[4, 4, 0, 0]} barSize={12} />
+              <Bar dataKey="Negative" fill="#64748b" radius={[4, 4, 0, 0]} barSize={12} />
+              <Bar dataKey="Followups" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={12} />
             </BarChart>
           </ResponsiveContainer>
         </div>

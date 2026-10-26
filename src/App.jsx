@@ -30,6 +30,9 @@ import PendingLeads from './Pages/PendingLeads';
 import EmployeeTagRequest from './Pages/EmployeeTagRequest';
 import AvailableLeadsPage from './Pages/EnquiryForm';
 import EmployeeDateReport from './Pages/EmployeeDateReport';
+import ExcelLeadsAdmin from './Pages/ExcelLeadsAdmin';
+import ExcelLeadsEmployee from './Pages/ExcelLeadsEmployee';
+import FullExcelLeads from './Pages/FullExcelLeads';
 
 function App() {
   return (
@@ -43,7 +46,7 @@ function App() {
           <Route  path='/missedLeads' element={<MissedLeads/>}/>
           <Route  path='/todayReminders' element={<Reminders/>}/>
           <Route  path='/report' element={<Report/>}/>
-          <Route  path='/employee/date-report' element={<EmployeeDateReport/>}/>
+
           <Route  path='/DynamicTable' element={<DynamicTable/>}/>
           <Route  path='/profile' element={<Profile/>}/>
           <Route  path='/card' element={<DynamicCard/>}/>
@@ -59,9 +62,11 @@ function App() {
           <Route  path='/negative' element={<NegativeLead/>}/>
 
           <Route  path='/fullLeads' element={<FullLeads/>}/>
+          <Route  path='/fullExcelLeads' element={<FullExcelLeads/>}/>
           <Route  path='/notes' element={<FollowUpNotes/>}/>
           
           <Route  path='/request' element={<EmployeeTagRequest/>}/>
+          <Route path='/excel-leads-employee' element={<ExcelLeadsEmployee/>}/>
         </Routes>
       </Router>
     </>

@@ -10,7 +10,9 @@ import {
   ThumbsDown,
   Info,
   FileText,
-  ChevronRight
+  ChevronRight,
+  LogOut,
+  User
 } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -49,19 +51,13 @@ const Dashboard = ({ children }) => {
   const name = userString ? JSON.parse(userString) : null;
 
   // Menu items matching your old navigation
-  const menuList = [
-    { 
-      label: "Dashboard", 
-      path: "/Main", 
-      icon: "LayoutDashboard",
-      exact: true
-    },
-    { 
-      label: "Date Report", 
-      path: "/employee/date-report", 
-      icon: "FileText",
-      exact: true
-    },
+    const menuList = [
+      { 
+        label: "Dashboard", 
+        path: "/Main", 
+        icon: "LayoutDashboard",
+        exact: true
+      },
     { 
       label: "Add Leads", 
       path: null, 
@@ -110,6 +106,12 @@ const Dashboard = ({ children }) => {
       label: "Calender", 
       path: "/calender", 
       icon: "Calendar",
+      exact: true
+    },
+    { 
+      label: "My Excel Leads", 
+      path: "/excel-leads-employee", 
+      icon: "FileText",
       exact: true
     },
   ];
